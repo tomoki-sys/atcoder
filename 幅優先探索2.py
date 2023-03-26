@@ -16,14 +16,14 @@ grid=[list(input()) for _ in range(r)]
 
 q=deque()
 
-q.append((sy,sx))
+q.append((sy,sx))#リストではなく、タプルで入力する
 
 dist=[[-1 for _ in range(c)] for _ in range(r)]
 
 dist[sy][sx]=0 #探索済み
 
 
-dy=(0,1,0,-1)
+dy=(0,1,0,-1)#不変のものにはタプルを使用する
 dx=(1,0,-1,0)
 
 

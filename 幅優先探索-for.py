@@ -10,28 +10,32 @@
 #%%
 #https://www.youtube.com/watch?v=-meNDDzhfm0
 #8:00
+from collections import deque
+
 class Solution:
     def numIslands(self,grid)->int:
         if grid==[]:
             return 0
         
-        rows,cols=len(grid),len(grid[0])
+        rows,cols=len(grid),len(grid[0])#マップの行列の長さを知る
         visited=set()#setは集合で、中に入っているかを確認するのに便利
         count=0
 
         def bfs(r,c):
             q=deque()
             
-            directons=[[1,0],[-1,0],[0,1],[0,-1]]
+            directons=[(1,0),(-1,0),(0,1),(0,-1)]
 
             q.append((r,c))
             
             while q:
-                row,col=q.popleft()
+                row,col=q.popleft()#popに変えるだけで深さ優先探索になる
                 for dir_r,dir_c in directons:
                     adj_r,adj_c=row+dir_r,col+dir_c
 
-                    if (adj_r)
+                    if (adj_r in range(rows)) and (adj_c in range(cols)) and (grid[adj_r][adj_c]==1) and ((adj_r,adj_c) not in visited):
+                        q.append((adj_r,adj_c))
+                        visited.add((adj_r,adj_c))#セットはappendではなく、setで追加する
 
 
         for r in range(rows):
@@ -39,6 +43,7 @@ class Solution:
                 if grid[r][c]=="1" and (r,c) not in visited:
                     bfs(r,c)#幅優先探索をしてカウントする
                     #陸とされるものを全て把握する
+                    #隣接する１を全て取得する
                     count+=1
 
         return count
